@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { AppHeader } from '@/components/app-header';
+
 import { Providers } from './providers';
 import './globals.css';
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <AppHeader />
           <main>{children}</main>
+
         </Providers>
       </body>
     </html>
