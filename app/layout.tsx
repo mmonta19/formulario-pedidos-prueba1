@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { AppHeader } from '@/components/app-header';
-import { StickyActions } from '@/components/sticky-actions';
+
 import { Providers } from './providers';
 import './globals.css';
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <AppHeader />
           <main>{children}</main>
-          <StickyActions />
+
         </Providers>
       </body>
     </html>

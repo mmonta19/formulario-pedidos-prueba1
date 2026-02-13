@@ -17,7 +17,7 @@ a {
 main {
   max-width: 700px;
   margin: 0 auto;
-  padding: 88px 16px 120px;
+
 }
 
 .page-card {
@@ -81,11 +81,6 @@ label {
   background: white;
   border-bottom: 1px solid #e4e9f5;
   min-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-}
 
 .top-header__cart {
   border: 0;
@@ -95,21 +90,4 @@ label {
   padding: 8px 14px;
   width: auto;
   min-height: unset;
-}
-
-.sticky-actions {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-top: 1px solid #e4e9f5;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-}
-
-.secondary {
-  background: #f4f6ff;
 }

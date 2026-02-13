@@ -2,21 +2,6 @@
 
 import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 
-export type NewCustomer = {
-  type: 'new';
-  fullName: string;
-  province: string;
-  locality: string;
-};
-
-export type ExistingCustomer = {
-  type: 'existing';
-  name: string;
-  surname: string;
-  dni: string;
-};
-
-export type CustomerData = NewCustomer | ExistingCustomer | null;
 
 export type CartItem = {
   id: string;
@@ -24,57 +9,26 @@ export type CartItem = {
 };
 
 export type OrderState = {
-  customer: CustomerData;
+
   cart: CartItem[];
   needs_review: boolean;
 };
 
 type OrderAction =
-  | { type: 'SET_CUSTOMER'; payload: CustomerData }
-  | { type: 'SAVE_DRAFT' }
-  | { type: 'ADD_CART_ITEM'; payload: CartItem }
-  | { type: 'CLEAR_ORDER' }
+
   | { type: 'HYDRATE'; payload: OrderState };
 
 const STORAGE_KEY = 'odontology_order_state_v1';
 
 const initialState: OrderState = {
-  customer: null,
+
   cart: [],
   needs_review: false
 };
 
 function orderReducer(state: OrderState, action: OrderAction): OrderState {
   switch (action.type) {
-    case 'SET_CUSTOMER':
-      return {
-        ...state,
-        customer: action.payload
-      };
-    case 'ADD_CART_ITEM': {
-      const existing = state.cart.find((item) => item.id === action.payload.id);
-      if (existing) {
-        return {
-          ...state,
-          cart: state.cart.map((item) =>
-            item.id === action.payload.id ? { ...item, quantity: item.quantity + action.payload.quantity } : item
-          )
-        };
-      }
 
-      return {
-        ...state,
-        cart: [...state.cart, action.payload]
-      };
-    }
-    case 'SAVE_DRAFT':
-      return {
-        ...state
-      };
-    case 'HYDRATE':
-      return action.payload;
-    case 'CLEAR_ORDER':
-      return initialState;
     default:
       return state;
   }
@@ -82,7 +36,7 @@ function orderReducer(state: OrderState, action: OrderAction): OrderState {
 
 type OrderContextType = {
   state: OrderState;
-  setCustomer: (customer: CustomerData) => void;
+
   saveDraft: () => void;
 };
 
@@ -110,7 +64,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo(
     () => ({
       state,
-      setCustomer: (customer: CustomerData) => dispatch({ type: 'SET_CUSTOMER', payload: customer }),
+
       saveDraft: () => dispatch({ type: 'SAVE_DRAFT' })
     }),
     [state]
